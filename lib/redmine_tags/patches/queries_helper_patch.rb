@@ -10,7 +10,7 @@ module RedmineTags
 
         def column_content(column, item)
           if column.name == :tags
-            column.value(issue).collect{ |t| render_tag_link(t) }
+            column.value(item).collect{ |t| render_tag_link(t) }
               .join(RedmineTags.settings[:issues_use_colors].to_i > 0 ? ' ' : ', ').html_safe
           else
             super
