@@ -17,8 +17,8 @@ module RedmineTags
             value = nil
           end
           if column.name == :tags && value.present? && value.kind_of?(ActiveRecord::Associations::CollectionProxy)
-            value = value.to_i
-            value.collect {|t| render_tag_link(t)}.compact.join(RedmineTags.settings[:issues_use_colors].to_i > 0 ? ' ' : ', ').html_safe
+            value = value.to_a
+            value.collect {|v| render_tag_link(column, item, v)}.compact.join(', ').html_safe
           else
             super
           end
